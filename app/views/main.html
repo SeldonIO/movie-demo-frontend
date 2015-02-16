@@ -1,0 +1,110 @@
+
+
+<div class="jumbotron">
+    <!--<img src="images/seldon-logo.png" alt="Seldon Logo" width="100%" />-->
+   <!--<h2>Movie Recommendations Demo</h2>-->
+     <p class="lead">
+        {{leadMessage}}
+     </p>
+
+
+    <div class="input-group">
+        <form ng-submit="searchMovies()">
+            <input type="text" id="movie-search-box" class="form-control" placeholder="Search for a movie..." ng-model="search_movie"/>
+        </form>
+              <span class="input-group-btn">
+        <button class="btn btn-default" id="movie-search-button" disabled="true" type="button" ng-click="searchMovies()">Go!</button>
+      </span>
+
+    </div>
+</div>
+
+<div id="watched" style="display: none">
+    <h3>Liked Movies
+        <button class="btn btn-default" type="button" ng-click="resetUser()">Clear</button>
+    </h3>
+    <div class="row">
+        <div class="col-xs-2 col-md-2 movie-column-small" ng-repeat="movie in watched">
+            <div class="movie-small thumbnail">
+            <div class="thumbnail movie-pic-small">
+                <img ng-src="{{movie.data.attributesName.img_url}}" title="{{movie.data.attributesName.title}}" />
+            </div>
+                <div class="caption movie-caption-small">
+                    <small>{{movie.data.attributesName.title}}</small>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--;getRecommendations('recommenders:MATRIX_FACTOR|RECENT_MATRIX_FACTOR,num_recent_actions:20' -->
+<div id="user-history-algs-section" style="display: none">
+    <div class="alert alert-success no-display" ng-class="likeAddedAlert" role="alert">{{success_message}}</div>
+    <h3>Recommendation Algorithms</h3>
+    <div class="alert alert-info " role="alert">Click on the algorithms below to get recommendations based on your liked movies or add some more liked movies to increase the accuracy. <a href="#/about#algoSection">More information</a></div>
+    <ul class="nav nav-pills nav-justified">
+        <li ng-class="mfActivated"><a ng-click="activateAlgButton('mfActivated');getRecommendations('recommenders:MATRIX_FACTOR|RECENT_MATRIX_FACTOR,num_recent_actions:20')">Matrix Factorization</a></li>
+        <li ng-class="simActivated"><a ng-click="activateAlgButton('simActivated');getRecommendations('recommenders:RECENT_SIMILAR_ITEMS,num_recent_actions:20')">Similar Items</a></li>
+        <li ng-class="semActivated"><a ng-click="activateAlgButton('semActivated');getRecommendations('recommenders:SEMANTIC_VECTORS,num_recent_actions:20')">Tag Similarity</a></li>
+        <li ng-class="wordActivated"><a ng-click="activateAlgButton('wordActivated');getRecommendations('recommenders:SEMANTIC_VECTORS,num_recent_actions:20,sv_prefix:word2vec')">Word2Vec</a></li>
+<!--        <li ng-class="topActivated"><a ng-click="activateAlgButton('topActivated');getRecommendations('recommenders:TOPIC_MODEL|RECENT_TOPIC_MODEL,num_recent_actions:20')">Topic Model</a></li> -->
+    </ul>
+
+    </div>
+        <div class="alert alert-success no-display" ng-class="searchAlert" role="alert">{{failed_search_message}}</div>
+        <div class="alert alert-success no-display" ng-class="recAlert" role="alert">{{failed_rec_message}}</div>
+        <div id="searched-movies" style="display: none">
+        <h3 class="no-display" ng-class="searchResultsClass">Search results</h3>
+        <div class="alert alert-success no-display" ng-class="infoAlert" role="alert">{{info_message}}</div>
+        <h3 class="no-display" ng-class="recResults">Recommendation results:</h3>
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-3" ng-repeat="movie in movies.list">
+                <div class="film thumbnail">
+                    <div class="film-pic thumbnail" style="cursor: pointer">
+                        <img class='movie-pic-img' ng-src="{{movie.attributesName.img_url}}" title="{{movie.attributesName.title}}" ng-click="addUserAction({{movie.id}})"/>
+                    </div>
+                    <div class="caption movie-capt">
+                        <!--         <h4>{{movie.attributesName.title}}</h4>
+                                <p>{{movie.attributesName.genre1}}</p> -->
+
+                        {{movie.attributesName.title}}
+                    </div>
+                    <div class="text-center">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button title="Like this movie" type="button" class="btn btn-default" ng-click="addUserAction({{movie.id}})">Like</button>
+
+                            <!--<div class="btn-group" role="group">-->
+                                <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">-->
+                                    <!--Find-->
+                                    <!--<span class="caret"></span>-->
+                                <!--</button>-->
+                                <!--<ul class="dropdown-menu" role="menu">-->
+                                    <!--<li><a ng-click="getRecommendations('recommenders:RECENT_MATRIX_FACTOR,num_recent_actions:1',{{movie.id}})">Matrix factorization</a></li>-->
+                                    <!--<li><a ng-click="getRecommendations('recommenders:RECENT_SIMILAR_ITEMS,num_recent_actions:1',{{movie.id}})">Similar Items</a></li>-->
+                                    <!--<li><a ng-click="getRecommendations('recommenders:SEMANTIC_VECTORS,num_recent_actions:1',{{movie.id}})">Tag similarity</a></li>-->
+                                    <!--<li><a ng-click="getRecommendations('recommenders:RECENT_TOPIC_MODEL,num_recent_actions:1',{{movie.id}})">Topic model</a></li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+<!--
+<div class="row marketing">
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div>
+-->

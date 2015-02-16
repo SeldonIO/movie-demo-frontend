@@ -1,0 +1,40 @@
+
+<p>This is a demonstration of the Seldon Predictive engine in the domain of movies. Give the engine some information about
+    some films that you like and it will make predictions about what you should watch next. For example, if you liked
+    Star Wars Episode IV - A New Hope and Alien then it might suggest Blade Runner. Also, you can find recommendations
+    for a specific film rather than liking a number of movies. Try it out!</p>
+<h2>User page</h2>
+<p>When returning to the demo, your likes will still be stored. If you want to start fresh, press the reset button on the
+    user page.</p>
+<h2>Movie Data</h2>
+Thanks for GroupLens for providing the following open datasets we have used.
+<ul>
+ <li><a href="http://grouplens.org/datasets/movielens/">The Movielens 10 Million dataset</a></li>
+ <li><a href="http://grouplens.org/datasets/hetrec-2011/">HETREC 2011 dataset</a>
+</ul>
+
+<p>Thanks also to <a href="Freebase">Freebase</a> which we use to augment the tags of the movies</p>
+
+<p>
+We will provide complete instructions to recreate this demo using Seldon's open source solution in the coming weeks.
+</p>
+<div>
+<h2 id="algoSection">Algorithms</h2>
+The algorithms available in the demo are a subset of the algorithms available in Seldon.
+<ul>
+ <li>Matrix Factorization. An algorithm made popular due to the Netflix competition. It tries to find a small set of latent user and item factors that explain the user-item viewing data. We use the <a href="https://spark.apache.org/docs/latest/mllib-collaborative-filtering.html">Apache Spark ALS</a> implementation plus additional online functionality for fold-in of new users.</li>
+ <li>Similar Items. An algorithm that provides similar functionality to Amazon's "people who bought this also bought..". It uses the user-item viewing data to find sets of movies that are similar. Recommendations are providing by scoring each movie in your viewing history and selecting top scoring movies. We use the <a href="https://issues.apache.org/jira/browse/SPARK-2885">Apache Spark DIMSUM</a> implementation.</li>
+ <li>Tag Similarity. An algorithm based purely on the meta data associated with each movie. It finds movies that are similar based on their tags. In this case, user generated tags, the actors and directors. We use the open source <a href="https://code.google.com/p/semanticvectors/">Semantic Vectors</a> package that provides fast scalable vector space representations for each movie.</li>
+ <li>Word2Vec. Creates a vector representation of movies using <a href="https://spark.apache.org/docs/latest/mllib-feature-extraction.html#word2vec">Apache Spark's Word2Vec</a> implementation. In this case a "word" is a movie id and the "documents" are the ordered list of movies rated by each user.</li>
+ <li>Topic Model. An algorithm that combines the tags for each movie with each users viewing behaviour. Each such viewing history of tags is viewed as a "document" and the algorithm trys to find a set of topics (200 in this case) that explain those "documents". We use Apache Spark plus the LDA algorithm implemented in <a href="https://github.com/JohnLangford/vowpal_wabbit/wiki">Vowpal Wabbit.</a></li>
+</ul>
+</div>
+<h2>Caveats</h2>
+There are several differences to this demo and a production setting:
+<ul>
+  <li>In a production setting Seldon allows mixing of results of several algorithms to produce the best combined result.</li>
+  <li>In a live setting there is real time activity data that can be used to change the results in real time based based on current viewing behaviour. Also algorithms that run based on what similar people are viewng now can be used.</li>
+  <li>Its posisble to run automated A/B tests to optimize which suite of algorithms is presently most successful based on some criteria, e.g. click through rate, or dwell time.
+  <li> In a live setting one would probably diversify the results more to ensure people saw a wide range of recommendations</li>
+</ul>
+We also have not spent a long time trying to derive a good set of meta data for each movie, e.g. by matching against Freebase. Therefore algorithms which depend on the meta data such as tag similarity and topic models may sometimes give strange results if there are little or no tags for the movie.
