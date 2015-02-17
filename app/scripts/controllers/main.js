@@ -55,7 +55,7 @@ angular.module('movielensApp')
                 if (movie.data) {
                     movie = movie.data;
                 }
-                if (movie['attributesName'] && movie['attributesName']['img_url']) {
+                if (movie['attributesName'] && movie['attributesName']['img_url'] && EMBEDLY_URL_PREFIX != '') {
                     movie['attributesName']['img_url'] = EMBEDLY_URL_PREFIX + encodeURIComponent(movie['attributesName']['img_url']);
                 }
             });
