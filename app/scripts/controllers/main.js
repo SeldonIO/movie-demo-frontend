@@ -28,7 +28,7 @@ angular.module('movielensApp')
         $scope.recResults='';
         $scope.searchedBefore = false;
         var user_id = ""; // update the text box
-        var EMBEDLY_URL_PREFIX= "http://i.embed.ly/1/display/resize?key=<EMBEDLY_KEY_HERE>&url=";
+	var EMBEDLY_URL_PREFIX= "<EMBEDLY_HERE>"
 
         var secondaryLeadMessage = "Add more films to increase the accuracy of the predictions...";
         var generateUUID = function() {

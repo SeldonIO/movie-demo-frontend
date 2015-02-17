@@ -204,7 +204,6 @@ seldonAPI.factory('Seldon', ['$http','$q',
                 var params = {
                     'consumer_key': consumer_key2,
                     'user': user_id,
-                    'dimension': '4',
                     'attributes': 'title,img_url,genre1',
                     // 'consumer_secret': consumer_secret,
                     'jsonpCallback': 'JSON_CALLBACK',
