@@ -42,11 +42,11 @@
     <h3>Recommendation Algorithms</h3>
     <div class="alert alert-info " role="alert">Click on the algorithms below to get recommendations based on your liked movies or add some more liked movies to increase the accuracy. <a href="#/about#algoSection">More information</a></div>
     <ul class="nav nav-pills nav-justified">
-        <li ng-class="mfActivated"><a ng-click="activateAlgButton('mfActivated');getRecommendations('recommenders:MATRIX_FACTOR|RECENT_MATRIX_FACTOR,num_recent_actions:20')">Matrix Factorization</a></li>
-        <li ng-class="simActivated"><a ng-click="activateAlgButton('simActivated');getRecommendations('recommenders:RECENT_SIMILAR_ITEMS,num_recent_actions:20')">Similar Items</a></li>
-        <li ng-class="semActivated"><a ng-click="activateAlgButton('semActivated');getRecommendations('recommenders:SEMANTIC_VECTORS,num_recent_actions:20')">Tag Similarity</a></li>
-        <li ng-class="wordActivated"><a ng-click="activateAlgButton('wordActivated');getRecommendations('recommenders:SEMANTIC_VECTORS,num_recent_actions:20,sv_prefix:word2vec')">Word2Vec</a></li>
-<!--        <li ng-class="topActivated"><a ng-click="activateAlgButton('topActivated');getRecommendations('recommenders:TOPIC_MODEL|RECENT_TOPIC_MODEL,num_recent_actions:20')">Topic Model</a></li> -->
+        <li ng-class="mfActivated"><a ng-click="activateAlgButton('mfActivated');getRecommendations('recommenders:MATRIX_FACTOR|RECENT_MATRIX_FACTOR')">Matrix Factorization</a></li>
+        <li ng-class="simActivated"><a ng-click="activateAlgButton('simActivated');getRecommendations('recommenders:RECENT_SIMILAR_ITEMS')">Similar Items</a></li>
+        <li ng-class="semActivated"><a ng-click="activateAlgButton('semActivated');getRecommendations('recommenders:SEMANTIC_VECTORS')">Tag Similarity</a></li>
+        <li ng-class="wordActivated"><a ng-click="activateAlgButton('wordActivated');getRecommendations('recommenders:WORD2VEC')">Word2Vec</a></li>
+<!--        <li ng-class="topActivated"><a ng-click="activateAlgButton('topActivated');getRecommendations('recommenders:TOPIC_MODEL|RECENT_TOPIC_MODEL')">Topic Model</a></li> -->
     </ul>
 
     </div>
