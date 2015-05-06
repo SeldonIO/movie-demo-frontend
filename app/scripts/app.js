@@ -214,8 +214,19 @@ seldonAPI.factory('Seldon', ['$http','$q',
 
                 return asyncAPICall(endpoint,params);
 
-            }
+            },
+            addUser: function(user_id) {
 
+                var endpoint = "/js/user/new";
+
+                var params = {
+                    'consumer_key': consumer_key2,
+                    'user':user_id,
+                    'jsonpCallback': 'JSON_CALLBACK'
+                };
+
+                return asyncAPICall(endpoint,params);
+            }
         }
     }]);
 

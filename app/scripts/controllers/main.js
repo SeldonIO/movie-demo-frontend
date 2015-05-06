@@ -270,11 +270,14 @@ angular.module('movielensApp')
             });
         };
         getUserId();
-        getAccessToken();
-        $("#movie-search-box").keyup(function() {
-            var empty = $("#movie-search-box").val() == "";
-            jQuery("#movie-search-button").prop('disabled', empty);
+        // Make sure the user is created
+        Seldon.addUser(user_id).then(function(response){
+            getAccessToken();
+            $("#movie-search-box").keyup(function() {
+                var empty = $("#movie-search-box").val() == "";
+                jQuery("#movie-search-button").prop('disabled', empty);
 
+            });
         });
         function unused(data) {
             $scope.movies = data;
