@@ -19,7 +19,7 @@ angular.module('movielensApp')
         $scope.leadMessage=INTRO_MESSAGE;
         $scope.info_message="Now you can like some movies to build up a profile.";
         $scope.failed_search_message="No matching movies found. Note only movies before 2010 are in the database.";
-        $scope.failed_rec_message="No recommendations returned for this algorihtm. Try liking another movie or trying a different algorithm.";
+        $scope.failed_rec_message="No recommendations returned for this algorithm. Try liking another movie or trying a different algorithm.";
         $scope.mfActivated = '';
         $scope.simActivated = '';
         $scope.semActivated = '';
