@@ -118,6 +118,8 @@ angular.module('movielensApp')
             jQuery("#searched-movies").hide();
             $cookieStore.remove("userId");
             getUserId();
+            // Make sure the user is created
+            Seldon.addUser(user_id).then(function(response){});
         };
 
         $scope.searchMovies = function() {
